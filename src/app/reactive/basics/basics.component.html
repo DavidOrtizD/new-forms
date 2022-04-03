@@ -1,1 +1,51 @@
-test
+<h2>
+  Reactive: <small>Basics</small>
+</h2>
+
+<hr>
+
+<div class="row">
+  <div class="col">
+    <form (ngSubmit)="save()" [formGroup] = "myForm">
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Product</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"  name="product" required minlength="3" formControlName = "product" placeholder="Product Name">
+          <span class="form-text text-danger" *ngIf = "inputHasErrors('product')">It must be at least 3 leters.</span>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Cost</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control"  formControlName="cost" placeholder="Product Cost">
+          <span class="form-text text-danger" *ngIf="inputHasErrors('cost')" >Price must be greater than 0.</span>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">In stock</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control"  formControlName="stock" placeholder="Product in stock"  required>
+          <span class="form-text text-danger" *ngIf="inputHasErrors('stock')" >Stock must be greater than 1.</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-primary float-end" >Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <span>Valid</span> <br>
+    <pre>{{myForm.valid}}</pre>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <span>Value</span> <br>
+    <pre>{{myForm.value | json}}</pre>
+  </div>
+</div>

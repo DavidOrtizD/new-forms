@@ -1,1 +1,55 @@
-<p>dynamics works!</p>
+<h2>
+  Reactive: <small>Dynamics</small>
+</h2>
+
+<hr>
+
+<div class="row">
+  <div class="col">
+    <form [formGroup]="myForm">
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Name</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control"  formControlName="personName" placeholder="Person Name">
+          <span class="form-text text-danger" *ngIf="myForm.controls['personName'].errors && myForm.controls['personName'].touched" >This field is required, and has a min length of 3.</span>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">New Game</label>
+        <div class="col-sm-9">
+          <div class="input-group">
+            <input type="text" class="form-control" (keyup.enter)="addNewGame()" [formControl]="newGame" placeholder="Add a new game">
+            <button class="btn btn-outline-primary" (click) = "addNewGame()" type = "button">Add</button>
+          </div>
+          <span class="form-text text-danger" *ngIf="myForm.get('newGame')?.hasError && myForm.get('newGame')?.touched" >This field has a min length of 3.</span>
+        </div>
+      </div>
+      <!-- List of favorite games -->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Favorites</label>
+        <div class="col-sm-9" formArrayName="favorites">
+          <div class="input-group mb-1" *ngFor = "let favorite of favorites.controls; let i = index">
+            <input type="text" class="form-control"  [formControlName] = "i">
+            <button class="btn btn-outline-danger" (click) = "removeGame(i)" type = "button" >Remove</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-primary float-end" (click)="save()" type = "button">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <span>Form</span> <br>
+    <pre>{{myForm.value | json}}</pre>
+  </div>
+  <div class="col">
+    <span>Valid</span> <br>
+    <pre>{{myForm.valid}}</pre>
+  </div>
+</div>
