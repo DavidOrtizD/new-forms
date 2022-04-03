@@ -1,0 +1,51 @@
+<h2>
+  Template: <small>Basics</small>
+</h2>
+
+<hr>
+
+<div class="row">
+  <div class="col">
+    <form (ngSubmit)="save()" #myForm="ngForm">
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Product</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" [(ngModel)] = "initialFormVlues.product" name="product" required minlength="3" #product="ngModel" placeholder="Product Name">
+          <span class="form-text text-danger" *ngIf="product?.invalid && product?.touched">It must be at least 3 leters.</span>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Cost</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control" [(ngModel)] = "initialFormVlues.cost" name="cost" #cost="ngModel" required min="1" placeholder="Product Cost">
+          <span class="form-text text-danger" *ngIf="cost.errors?.['min'] && cost?.touched">Price must be greater than 0.</span>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">In stock</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control" [minimum] = "1" appCustomMin [(ngModel)] = "initialFormVlues.stock" name="stock" placeholder="Product in stock" #stock="ngModel" required>
+          <span class="form-text text-danger" *ngIf="stock.errors?.['customMin'] && stock?.touched">Stock must be greater than 1.</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-primary float-end" [disabled] = "myForm.valid == false">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <span>Valid</span> <br>
+    <span>{{myForm.valid}}</span>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <span>Value</span> <br>
+    <span>{{myForm.value | json}}</span>
+  </div>
+</div>

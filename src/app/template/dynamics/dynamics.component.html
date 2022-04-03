@@ -1,0 +1,50 @@
+<h2>
+  Template: <small>Dynamics</small>
+</h2>
+
+<hr>
+
+<div class="row">
+  <div class="col">
+    <form #myForm="ngForm">
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Name</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" [ngModel] = "person.name" name="personName" required #personName="ngModel" placeholder="Person Name">
+          <span class="form-text text-danger" *ngIf="personName?.invalid && personName?.touched">This field is required.</span>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Name</label>
+        <div class="col-sm-9">
+          <div class="input-group">
+            <input type="text" class="form-control" [(ngModel)] = "newGame" (keyup.enter) = "addNewGame()" name="newGame" #addGame="ngModel" placeholder="Add a new game">
+            <button class="btn btn-outline-primary" type = "button" (click) = "addNewGame()">Add</button>
+          </div>
+        </div>
+      </div>
+      <!-- List of favorite games -->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Favorite</label>
+        <div class="col-sm-9">
+          <div class="input-group mb-1" *ngFor="let game of person.favorites; let i =  index">
+            <input type="text" class="form-control"  [name] = "'game_'+i" [ngModel] = "game.name">
+            <button class="btn btn-outline-danger" type = "button" (click) = "removeGame(i)">Remove</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-primary float-end" type = "button" (click) = "save()" [disabled] = "myForm.valid == false">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <span>Person</span> <br>
+    <pre>{{person | json}}</pre>
+  </div>
+</div>
