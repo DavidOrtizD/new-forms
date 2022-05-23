@@ -21,3 +21,15 @@
     {{menuRoute.routeName}}
   </li>
 </ul>
+
+<h2 class="mt-2">
+  Dynamic Inputs
+</h2>
+
+<hr>
+
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let menuRoute of dynamicRoutes" [routerLink]="menuRoute.routePath" routerLinkActive="active" >
+    {{menuRoute.routeName}}
+  </li>
+</ul>

@@ -10,6 +10,10 @@ const routes: Routes = [{
   loadChildren: () => import('./reactive/reactive.module').then(m => m.ReactiveModule)
 },
 {
+  path: 'dynamic-inputs',
+  loadChildren: () => import('./dynamic-inputs/dynamic-inputs.module').then(m => m.DynamicInputsModule)
+},
+{
   path: '**',
   redirectTo: 'template'
 }

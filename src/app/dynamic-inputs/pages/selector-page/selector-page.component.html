@@ -1,0 +1,42 @@
+<h1 class="mt-5">
+  Nested Selectors
+</h1>
+
+<hr>
+
+<form [formGroup]= "myForm" (ngSubmit)="save()">
+  <div class="col mb-3">
+    <label for="" class="form-label">Region</label>
+    <select class="form-control" formControlName = "region">
+      <option value="">Select Region</option>
+      <option [value]="region | lowercase" *ngFor = "let region of regions">{{region}}</option>
+    </select>
+  </div>
+  <div class="col mb-3" *ngIf = "countries.length > 0">
+    <label for="" class="form-label">Country</label>
+    <select class="form-control" formControlName = "country">
+      <option value="">Select Country</option>
+      <option [value]="country.cca3" *ngFor = "let country of countries">{{country.name.common}}</option>
+    </select>
+  </div>
+  <div class="col mb-3" *ngIf = "countries.length > 0">
+    <label for="" class="form-label">Borders</label>
+    <select class="form-control" formControlName = "border">
+      <option value="">Select Border</option>
+      <option [value]="border" *ngFor = "let border of this.borders">{{border}}</option>
+    </select>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary float-end" type="submit">Submit</button>
+    </div>
+  </div>
+</form>
+
+<h3>Form</h3>
+<pre>
+  valid: {{myForm.valid}}
+</pre>
+<pre>
+  {{ myForm.value | json }}
+</pre>

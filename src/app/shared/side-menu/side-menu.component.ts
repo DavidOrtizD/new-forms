@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterHelper } from '../router-helper';
-import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-menu',
@@ -42,6 +41,14 @@ export class SideMenuComponent implements OnInit {
       routeName: 'Switches',
       routePath: '/reactive/switches',
       parent:'reactive'
+    }
+  ];
+  
+  public dynamicRoutes: RouterHelper [] = [
+    {
+      routeName: 'Selector',
+      routePath: '/dynamic-inputs/selector',
+      parent:'dynamic-innputs'
     }
   ];
 
